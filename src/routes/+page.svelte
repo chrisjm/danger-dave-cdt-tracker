@@ -1,6 +1,8 @@
 <script lang="ts">
 	/** @type {import('./$types').PageData} */
 	import { MapLibre, Marker, Popup } from 'svelte-maplibre';
+	import { mdiMapMarker } from '@mdi/js';
+	import Icon from 'mdi-svelte';
 	export let data;
 </script>
 
@@ -17,12 +19,14 @@
 	>
 		{#each data.markers as { longitude, latitude, date, time, message, datetime } (datetime)}
 			<Marker lngLat={[longitude, latitude]}>
-				<div class="text-black grid place-items-center">
-					<div class="font-medium">{date} - {time}</div>
-					<div class="shadow rounded-full bg-red-500 w-4 h-4" />
+				<div class="grid place-items-center">
+					<div class="text-white bg-black opacity-75 rounded p-1 font-medium">{date} - {time}</div>
+					<div class="text-red-700">
+						<Icon path={mdiMapMarker} />
+					</div>
 				</div>
 
-				<Popup openOn="hover" offset={[0, -10]}>
+				<Popup openOn="click" offset={[0, -10]}>
 					<div class="text-lg font-bold">{message}</div>
 				</Popup>
 			</Marker>
