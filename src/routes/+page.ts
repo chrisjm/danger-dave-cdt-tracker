@@ -7,6 +7,7 @@ interface Row {
 	latitude: number;
 	longitude: number;
 	elevation_ft: number;
+	elevation_m: number;
 	message: string;
 }
 

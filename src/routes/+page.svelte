@@ -38,7 +38,7 @@
 				}}
 			/>
 		</GeoJSON>
-		{#each data.markers as { longitude, latitude, date, time, message, datetime } (datetime)}
+		{#each data.markers as { longitude, latitude, date, time, message, datetime, elevation_m, elevation_ft } (datetime)}
 			<Marker lngLat={[longitude, latitude]} class="relative h-12">
 				<div class="absolute -top-8">
 					<div class="w-32 text-center text-white bg-black opacity-75 rounded p-1 font-medium">
@@ -53,6 +53,8 @@
 
 				<Popup openOn="click" offset={[0, -10]}>
 					<div class="text-lg font-bold">{message}</div>
+					<div class="text-sm">{datetime} @ {elevation_m}m ({elevation_ft}ft)</div>
+					<div class="text-sm">Longitude: {longitude} / Latitude: {latitude}</div>
 				</Popup>
 			</Marker>
 		{/each}
