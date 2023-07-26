@@ -26,8 +26,20 @@
 		style="https://api.maptiler.com/maps/outdoor-v2/style.json?key=5bZgbbfhKetusy1e0Lra"
 		standardControls
 		center={[-113.659615, 48.995805]}
-		zoom={10}
+		zoom={8}
 	>
+		{#if data.cdtGeoJson}
+			<GeoJSON data={data.cdtGeoJson} generateId={true}>
+				<LineLayer
+					layout={{ 'line-cap': 'round', 'line-join': 'round' }}
+					paint={{
+						'line-width': 1,
+						'line-color': '#FF0000',
+						'line-opacity': 0.8
+					}}
+				/>
+			</GeoJSON>
+		{/if}
 		<GeoJSON data={pathData} generateId={true}>
 			<LineLayer
 				layout={{ 'line-cap': 'round', 'line-join': 'round' }}

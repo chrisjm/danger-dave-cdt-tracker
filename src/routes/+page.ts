@@ -29,7 +29,13 @@ export const load: PageLoad = async ({ fetch }) => {
 		jsonData.push(obj);
 	}
 
+	const cdtTrailResult = await fetch(
+		'https://wanderingleafstudios.s3.us-west-1.amazonaws.com/geojson/simplified-000005.geojson'
+	);
+	const cdtGeoJson = await cdtTrailResult.json();
+
 	return {
-		markers: jsonData
+		markers: jsonData,
+		cdtGeoJson
 	};
 };
