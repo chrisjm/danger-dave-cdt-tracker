@@ -7,7 +7,8 @@
 	import { format } from 'd3-format';
 	export let data;
 
-	const formatMiles = format('.2s');
+	const formatFriendly = format('.2s');
+	const formatPrecise = format('.2f');
 
 	$: markers = data.markers;
 	$: cdtGeoJson = data.cdtGeoJson;
@@ -110,8 +111,10 @@
 		{#each lineMarkers as { midpoint, distance }}
 			<Marker lngLat={[midpoint[0], midpoint[1]]} class="relative">
 				<div class="absolute -left-6 -top-3">
-					<div class="whitespace-nowrap text-center text-black bg-white text-xs rounded-lg px-1 py-0.5">
-						{distance > 1 ? `${formatMiles(distance)} miles` : formatMiles(distance)}
+					<div
+						class="whitespace-nowrap text-center text-black bg-white text-xs rounded-lg px-1 py-0.5"
+					>
+						{distance > 1 ? formatFriendly(distance) : formatPrecise(distance)} miles
 					</div>
 				</div>
 			</Marker>
