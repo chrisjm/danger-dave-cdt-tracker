@@ -30,7 +30,7 @@ export const load: PageLoad = async ({ fetch }) => {
 	}
 
 	const cdtTrailResult = await fetch(
-		'https://wanderingleafstudios.s3.us-west-1.amazonaws.com/geojson/cdt-simplified-000005.geojson'
+		'https://wanderingleafstudios.s3.us-west-1.amazonaws.com/geojson/cdt-simplified-0001.geojson'
 	);
 	const cdtGeoJson = await cdtTrailResult.json();
 
