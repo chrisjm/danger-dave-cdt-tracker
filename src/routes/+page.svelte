@@ -10,6 +10,8 @@
 	const formatFriendly = format('.2s');
 	const formatPrecise = format('.2f');
 
+	let pathCenter: [number, number] = [-113.659615, 48.995805];
+
 	$: markers = data.markers;
 	$: cdtGeoJson = data.cdtGeoJson;
 
@@ -20,7 +22,7 @@
 		},
 		geometry: {
 			type: 'LineString',
-			coordinates: [...markers.map((m) => [m.longitude, m.latitude])]
+			coordinates: [...markers.map((m) => [+m.longitude, +m.latitude])]
 		}
 	};
 
@@ -32,7 +34,13 @@
 	let lineMarkers: LineMarker[] = [];
 
 	$: {
-		if (markers && cdtGeoJson) {
+		if (pathData && markers && cdtGeoJson) {
+			// NOTE: Not what we want, but worth saving for future use / settings
+			// pathCenter = turf.center(pathData.geometry).geometry.coordinates as [number, number];
+
+			// Last marker as map center
+			pathCenter = [+markers[markers.length-5].longitude, +markers[markers.length-5].latitude];
+
 			for (let startMarkerIndex = 0; startMarkerIndex < markers.length - 1; startMarkerIndex++) {
 				let endPointIndex = startMarkerIndex + 1;
 				let startPoint = turf.point([
@@ -63,7 +71,7 @@
 	<MapLibre
 		style="https://api.maptiler.com/maps/outdoor-v2/style.json?key=5bZgbbfhKetusy1e0Lra"
 		standardControls
-		center={[-113.659615, 48.995805]}
+		center={pathCenter}
 		zoom={8}
 	>
 		{#if cdtGeoJson}
